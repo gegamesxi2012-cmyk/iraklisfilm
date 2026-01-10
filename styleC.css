@@ -1,114 +1,112 @@
 @font-face {
     font-family: "3d_unicode";
-    src: url("3d_unicode.ttf") format("truetype");
+    src: url("3d_unicode.woff2") format("woff2"),
+         url("3d_unicode.woff") format("woff");
 }
 
 * {
     position: relative;
+    box-sizing: border-box;
 }
 
 body {
     font-family: "bpg_extrasquare_mtavruli_2009", Georgia, 'Times New Roman', Times, serif;
     margin: 0;
-  
 }
 
-
+/* --- Background --- */
 body::before {
     content: "";
     position: fixed;
-    inset: 0; 
+    top: 0; left: 0; right: 0; bottom: 0;
     background-image: url("555.jpg");
-    filter: invert(100%);
     background-size: cover; 
+    background-position: center;
     background-repeat: no-repeat;
-    z-index: -1; 
-    width: 100vw;
-    height: 100vh;
+    filter: invert(100%);
+    z-index: -1;
 }
 
-
-.menu
-{
-opacity: 70%;
-margin-top: 20px;
-padding: 5px;
-border-radius: 5px;
-border: none;
-background-color: rgb(0, 0, 0);
-color: rgb(255, 0, 0);
-height: 50px;
-font-weight: bold;
-font-size: medium;
-cursor: pointer;
-box-shadow: 0px 5px 10px rgb(151, 151, 151);
-display: flex;
-justify-content: center;
-align-items: center; 
+/* --- Menu --- */
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0.7;
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 0, 0);
+    height: auto;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    box-shadow: 0px 5px 10px rgb(151, 151, 151);
+    gap: 10px;
 }
 
-.menu button
-{   
+.menu button {
     padding: 5px;
     margin: 3px;
     height: 50px;
     width: 100px;
     font-weight: bold;
-    background-color: rgba(255, 94, 0, 0.596);
+    background-color: rgba(255, 94, 0, 0.6);
     border-radius: 5px;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.349);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.menu button:hover
-{   
-    opacity: 70%;
-    padding: 5px;
-    margin: 3px;
+.menu button:hover {
+    opacity: 0.7;
     height: 45px;
     width: 98px;
-    background-color:  rgb(224, 138, 88);
-    border-radius: -5px;
+    background-color: rgb(224, 138, 88);
+    border-radius: 3px; /* -5 გაუქმდა */
     box-shadow: 0px 5px 10px rgb(255, 84, 84);
 }
 
-.menu input{
-    background-color:  rgb(224, 138, 88);
-    border: 3px solid rgba(167, 84, 6, 0.555);
+.menu input {
+    background-color: rgb(224, 138, 88);
+    border: 3px solid rgba(167, 84, 6, 0.55);
     height: 50px;
     border-radius: 5px;
     width: 300px;
     font-weight: bolder;
     color: black;
-
+    padding: 0 10px;
 }
 
-.menu input::placeholder{
-color: black;
+.menu input::placeholder {
+    color: black;
 }
 
 .menu img {
     height: 47px;
     width: auto;
     object-fit: contain;
-    margin-left: 10px; /* ოდნავ დაშორება მარცხენა კიდიდან */
+    margin-left: 10px;
     cursor: pointer;
     transition: transform 0.2s ease;
-    display: block;
 }
 
 .menu img:hover {
-    transform: scale(1.05); /* hover-ზე ოდნავ გადიდება */
+    transform: scale(1.05);
 }
 
+/* --- Main div --- */
 .mainDiv {
-    width: 100vw;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 80vh;
 }
 
-/* კონტენტის ყუთი */
+/* --- Content box --- */
 .content {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 25px;
@@ -121,7 +119,6 @@ color: black;
     box-shadow: 0px 10px 15px rgba(0,0,0,0.35);
 }
 
-/* ფორმის ელემენტები */
 .content form {
     display: flex;
     flex-direction: column;
@@ -135,7 +132,7 @@ color: black;
     padding: 10px;
     width: 90%;
     border-radius: 5px;
-    border: 2px solid rgba(167, 84, 6, 0.555);
+    border: 2px solid rgba(167, 84, 6, 0.55);
     font-size: 1rem;
 }
 
@@ -154,25 +151,68 @@ color: black;
     color: black;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease;
-    opacity: 70%;
+    transition: all 0.2s ease;
+    opacity: 0.7;
 }
 
 .content button[type="submit"]:hover {
-     opacity: 70%;
-    padding: 5px;
-    margin: 3px;
+    opacity: 0.7;
     height: 45px;
     width: 40%;
-    background-color:  rgb(224, 138, 88);
-    border-radius: -5px;
+    background-color: rgb(224, 138, 88);
+    border-radius: 3px;
     box-shadow: 0px 5px 10px rgb(255, 84, 84);
 }
 
-/* ტექსტის alignment */
+/* --- Text alignment --- */
 #mainTxt {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .menu {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .menu button, .menu input {
+        width: 90%;
+        height: 45px;
+        font-size: 16px;
+    }
+
+    .menu img {
+        height: auto;
+        max-width: 90%;
+        margin: 5px 0;
+    }
+
+    .content {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .content button[type="submit"] {
+        width: 50%;
+        height: 42px;
+    }
+
+    .content textarea {
+        height: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    .menu button, .menu input, .content button[type="submit"] {
+        font-size: 14px;
+        height: 40px;
+    }
+
+    .menu img {
+        max-height: 40px;
+    }
+}
