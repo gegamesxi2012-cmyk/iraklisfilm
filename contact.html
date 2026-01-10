@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>კონტაქტი</title>
+    <link rel="stylesheet" href="styleC.css">
+</head>
+<body>
+    <div class="menu">
+        <img src="ChatGPT2.png" alt="Logo">
+        <audio id="hoverSound" src="ClickSound.mp3" preload="auto"></audio>
+        <button onclick="location.href='index.html'">მთავარი</button>
+        <input type="search" placeholder="ძიება...">
+        <button onclick="location.href='register.html'" id="register">რეგისტრაცია</button>
+        <button onclick="location.href='login.html'" id="login">შესვლა</button>
+        <button onclick="location.href='main.html'">გალერეა</button>
+    </div>
+
+    <div class="mainDiv">
+        <div class="content">
+            <form action="">
+                <input type="tel" placeholder="შეიყვანეთ თქვენი საკონტაქტო ნომერი">
+                <input type="text" placeholder="შეიყვანეთ რას ეხება თემა(არასავალდებულო)">
+                <textarea placeholder="დაწერეთ თქვენი სათქმელი" id="mainTxt"></textarea>
+                <button type="submit">გაგზავნა</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
