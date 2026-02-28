@@ -98,7 +98,69 @@ color: black;
     transform: scale(1.05); /* hover-ზე ოდნავ გადიდება */
 }
 
+.irakliInf {
+    background-color: rgba(0, 0, 0, 0.7); 
+    position: fixed;
+    bottom: -3px; 
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%); 
+    height: 650px;
+    width: 100%; /* vw-ს ნაცვლად % ჯობია, რომ გვერდითა სქროლი არ გააჩინოს */
+    max-width: 1400px;
+    border-radius: 15px 15px 0 0; /* მხოლოდ ზედა კუთხეებს დაუმრგვალებს, რადგან დაბლა ეკვრის ეკრანს */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    box-sizing: border-box; /* ეს აუცილებელია! რომ padding-მა სიგანე არ გაზარდოს */
+    overflow: hidden; /* აი ეს კი იმ "rooler"-ს საბოლოოდ მოკლავს */
+}
 
+.irakli {
+    position: absolute;
+    bottom: 0;
+    left: -30px; /* სურათი მარცხენა კუთხეშია */
+    height: 950px; /* სიმაღლე შენ გემოზე */
+    width: auto;
+    z-index: 10;
+    pointer-events: none; /* რომ სურათზე კლიკმა ტექსტს ხელი არ შეუშალოს */
+}
+
+.info {
+    margin: 15px;
+    background-color:  rgba(255, 94, 0, 0.596);;
+    height: 90%;
+    width: 50%;
+    margin-left: auto; /* ტექსტს მაქსიმალურად მარჯვნივ გაწევს */
+    margin-right: 50px; /* მარჯვენა კიდიდანაც ცოტას დააშორებს */
+    padding: 30px;
+    border-radius: 15px;
+    z-index: 5; /* სურათზე დაბალი ინდექსი, რომ სურათი ზემოდან იყოს */
+    color: rgb(11, 10, 10);
+    /* სქროლბარის დამალვა */
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.info::-webkit-scrollbar {
+    display: none;
+}
+
+.info h2, .info h3 {
+    margin-top: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.info ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
 /* .card{
     
    height: 100vh;
