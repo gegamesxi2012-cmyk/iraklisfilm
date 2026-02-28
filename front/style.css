@@ -162,49 +162,61 @@ color: black;
     line-height: 1.5;
 }
 /* მობილურის ვერსია */
+/* მობილურის ვერსია (Responsive) */
 @media screen and (max-width: 768px) {
+    body {
+        overflow-y: auto; /* გვერდი რომ ჩვეულებრივ დასქროლო */
+    }
+
     .irakliInf {
-        height: auto; /* სიმაღლე გაიზარდოს ტექსტის შესაბამისად */
-        flex-direction: column; /* სურათი და ტექსტი დალაგდეს ერთმანეთის მიყოლებით */
-        justify-content: flex-start;
-        padding: 10px;
-        overflow-y: auto; /* რომ მობილურზე დასქროლვა შეგეძლოს */
-        position: relative; /* მობილურზე ჯობია fixed არ იყოს, რომ ადგილი არ წაიღოს */
-        bottom: 0;
-        transform: none;
-        left: 0;
-        right: 0;
+        position: relative; /* "მიჭედებული" აღარ იყოს, რომ არ დაიმალოს */
+        display: flex;
+        flex-direction: column; /* სურათი ზემოთ, ტექსტი ქვემოთ */
+        height: auto;
         width: 100%;
-        max-width: 100%;
-        border-radius: 0;
+        left: 0;
+        transform: none;
+        bottom: 0;
+        margin-top: 20px;
+        padding: 15px;
+        overflow: visible;
+        background-color: rgba(0, 0, 0, 0.8);
     }
 
     .irakli {
-        position: relative; /* სურათი აღარ იყოს ტექსტზე აკრული */
-        height: 350px; /* ტელეფონზე ცოტა დავაპატარაოთ */
+        position: relative;
+        height: 350px; /* ტელეფონზე 950px ძალიან ბევრია */
+        width: auto;
         left: 0;
-        bottom: 0;
-        margin: 20px auto;
+        margin: 0 auto; /* ცენტრში დასვამს სურათს */
         display: block;
+        z-index: 11;
+        bottom: 0;
     }
 
     .info {
-        width: 95%; /* ტექსტმა მთელი სიგანე დაიკავოს */
-        margin: 10px auto;
-        height: auto; /* სიმაღლე ტექსტზე იყოს დამოკიდებული */
-        overflow-y: visible; /* შიდა სქროლი აღარ გვინდა, მთლიანი გვერდი დასქროლონ */
-        padding: 20px;
-    }
-
-    .menu {
-        flex-wrap: wrap; /* მენიუს ღილაკები თუ არ დაეტევა, ქვემოთ ჩამოვიდეს */
+        width: 100% !important; /* მთელ სიგანეზე გაიშალოს */
+        margin: 10px 0 !important;
         height: auto;
-        padding: 10px;
+        min-height: 300px;
+        overflow-y: visible; /* შიდა სქროლი მოვხსნათ, რომ გვერდმა ჩაისქროლოს */
+        position: relative;
+        left: 0;
+        padding: 20px;
+        background-color: rgba(255, 94, 0, 0.8);
     }
 
-    .menu input {
-        width: 80%; /* ძიებაც დაპატარავდეს */
-        margin-top: 10px;
+    /* მენიუ რომ არ აიჭრას */
+    .menu {
+        height: auto;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .menu button, .menu input {
+        width: 90%;
+        margin: 5px 0;
     }
 }
 /* .card{
