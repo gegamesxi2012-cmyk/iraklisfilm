@@ -1,26 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo2.png"  type="image/x-icon" >
+    <title>ირაკლი რობაქიძე - მთავარი</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="icon" href="{% static 'logo2.png' %}" type="image/x-icon">
 </head>
 <body>
 <div class="menu">
-    <img src="logo2.png" alt="">
-    <audio id="hoverSound" src="ClickSound.mp3" preload="auto"></audio>
-    <button onclick="location.href='index.html'">მთავარი</button>
-    <button onclick="location.href='contact.html'">კონტაქტი</button>
+    <img src="{% static 'logo2.png' %}" alt="ლოგო">
+    <audio id="hoverSound" src="{% static 'ClickSound.mp3' %}" preload="auto"></audio>
+    
+    <a href="{% url 'home_page' %}"><button>მთავარი</button></a>
+    <a href="#"><button>კონტაქტი</button></a>
+    
     <input type="search" placeholder="ძიება...">
-    <button onclick="location.href='register.html'" id="register">რეგისტრაცია</button>
-    <button onclick="showlogin()">შესვლა</button>
-    <button onclick="location.href='main.html'">გალერეა</button>
+    
+    <a href="#"><button id="register">რეგისტრაცია</button></a>
+    <a href="{% url 'owner_login_page' %}"><button>ავტორიზაცია</button></a>
+    <a href="#"><button>გალერეა</button></a>
 </div>
 
 <div class="irakliInf">
-    <img src="irakli.png" alt="ირაკლი რობაქიძე" class="irakli">
+    <img src="{% static 'irakli.png' %}" alt="ირაკლი რობაქიძე" class="irakli">
     <div class="info">
         <h2>ირაკლი რობაქიძე</h2>
         <ul>
@@ -50,8 +54,8 @@
         </ul>
     </div>
 </div>
-<!-- JS უნდა იყოს ბოლოში! -->
-<script src="script.js"defer></script>
+
+<script src="{% static 'script.js' %}" defer></script>
 
 </body>
-</html> 
+</html>
