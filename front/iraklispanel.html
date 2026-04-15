@@ -10,106 +10,92 @@
             background-color: #1a1a1a;
             color: white;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* ელემენტები ერთმანეთის ქვეშ */
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 40px 0;
         }
-        .admin-panel {
+        .admin-panel, .messages-panel {
             background-color: #262626;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            width: 400px;
+            width: 450px;
             border: 1px solid #333;
+            margin-bottom: 30px;
         }
         h2 {
             text-align: center;
             color: #f39c12;
             margin-bottom: 25px;
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #bbb;
-        }
-        input[type="text"], 
-        input[type="number"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #444;
-            background-color: #333;
-            color: white;
-            box-sizing: border-box;
-        }
-        input[type="file"] {
-            color: #bbb;
-            font-size: 13px;
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: #bbb; }
+        input[type="text"], textarea {
+            width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #444;
+            background-color: #333; color: white; box-sizing: border-box;
         }
         button {
-            width: 100%;
-            padding: 12px;
-            background-color: #f39c12;
-            border: none;
-            border-radius: 6px;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
+            width: 100%; padding: 12px; background-color: #f39c12; border: none;
+            border-radius: 6px; color: black; font-weight: bold; cursor: pointer;
+            transition: 0.3s; margin-top: 10px;
         }
-        button:hover {
-            background-color: #e67e22;
+        button:hover { background-color: #e67e22; }
+        
+        /* შეტყობინებების სტილი */
+        .message-card {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f39c12;
         }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            color: #777;
-            text-decoration: none;
-            font-size: 13px;
-        }
+        .message-card h4 { margin: 0 0 5px 0; color: #f39c12; }
+        .message-card p { margin: 5px 0; font-size: 14px; }
+        .message-card .phone { color: #2ecc71; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="admin-panel">
     <h2>🎬 ფილმის ატვირთვა</h2>
-    
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        
         <div class="form-group">
             <label>ფილმის დასახელება</label>
             <input type="text" name="movie_title" placeholder="მაგ: მატრიცა" required>
         </div>
-
         <div class="form-group">
             <label>აღწერა</label>
             <textarea name="movie_description" rows="3" placeholder="მოკლე შინაარსი..."></textarea>
         </div>
-
         <div class="form-group">
-            <label>ფილმის ფაილი (MP4, MKV)</label>
-            <input type="file" name="movie_file" accept="video/*" required>
+           <label>ფილმის youtube ლინკი</label>
+            <input type="text" name="movie_file" placeholder="ფაილის URL ან პATH" required>
         </div>
-
-        <div class="form-group">
-            <label>პოსტერი (სურათი)</label>
-            <input type="file" name="movie_poster" accept="image/*">
-        </div>
-
         <button type="submit">ატვირთვის დაწყება</button>
-    </form>
-
-    <a href="/" class="back-link">← მთავარზე დაბრუნება</a>
+    
 </div>
+
+<div class="messages-panel">
+    <h2>📩 იუზერების შეტყობინებები</h2>
+    
+    {% if messages_list %}
+        {% for msg in messages_list %}
+            <div class="message-card">
+                <h4>თემა: {{ msg.subject }}</h4>
+                <p>{{ msg.text }}</p>
+                <p class="phone">📞 ნომერი: {{ msg.phone }}</p>
+                <small style="color: #777;">გამოგზავნილია: {{ msg.created_at|date:"d/m H:i" }}</small>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align: center; color: #777;">ჯერ შეტყობინებები არ არის.</p>
+    {% endif %}
+</div>
+
+<a href="/" style="color: #777; text-decoration: none;">← მთავარზე დაბრუნება</a>
 
 </body>
 </html>

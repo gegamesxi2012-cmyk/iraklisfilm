@@ -1,33 +1,32 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="ka">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>რეგისტრაცია</title>
-    <link rel="stylesheet" href="styleR.css">
-    <link rel="icon" href="logo2.png"  type="image/x-icon" >
+    <link rel="stylesheet" href="{% static 'styleR.css' %}">
+    <link rel="icon" href="{% static 'favicon.ico' %}"  type="image/x-icon" >
 </head>
 <body>
     <div class="menu">
-        <img src="logo2.png" alt="">
-        <button onclick="location.href='index.html'">მთავარი</button>
-        <button onclick="location.href='contact.html'">კონტაქტი</button>
+        <img src="{% static 'logo2.png' %}" alt="">
+        <a href="{% url 'home_page' %}"><button>მთავარი</button></a>
         <input type="search" placeholder="ძიება...">
-        <button onclick="location.href='login.html'">შესვლა</button>
+        <a href="{% url 'login_page' %}"><button>შესვლა</button></a>
         <button onclick="location.href='main.html'">გალერეა</button>
     </div>
     
     <div class="card">
         <div class="content">
             <h2>რეგისტრაცია</h2>
-            <form>
-                <input type="text" placeholder="სახელი" required>
-                <input type="text" placeholder="გვარი" required>
-                <input type="tel" placeholder="ტელეფონი" required>
-                <input type="password" placeholder="პაროლი" required>
-                <button type="submit">Submit</button>
-            </form>
+            <form method="POST"> {% csrf_token %} <input type="text" name="first_name" placeholder="სახელი" required>
+    <input type="text" name="last_name" placeholder="გვარი" required>
+    <input type="tel" name="phone" placeholder="ტელეფონი" required>
+    <input type="password" name="password" placeholder="პაროლი" required>
+    
+    <button type="submit">Submit</button>
+</form>
         </div>
     </div>
 </body>

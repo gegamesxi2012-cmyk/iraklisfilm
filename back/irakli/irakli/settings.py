@@ -1,13 +1,19 @@
 import os
 from pathlib import Path
 
-# BASE_DIR ახლა არის: .../iraklis film/back/irakli
+# BASE_DIR არის შენი 'back' ფოლდერი
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# უსაფრთხოების გასაღები
 SECRET_KEY = 'django-insecure-ds)-lka57h8o)&#46^sj@m$e2=wn277-i=9fn30_wniv)o^kur'
-DEBUG = True
-ALLOWED_HOSTS = []
 
+# დეველოპმენტის დროს True, ჩაბარებისას თუ სერვერზე გაუშვებ - False
+DEBUG = True
+
+# ყველასთვის ხელმისაწვდომი რომ იყოს
+ALLOWED_HOSTS = ['*']
+
+# აპლიკაციები
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -15,7 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'owner', # შენი აპლიკაციის სახელი (თუ owner დაარქვი)
+    'owner', # დარწმუნდი, რომ შენს აპლიკაციას ზუსტად ეს ჰქვია
 ]
 
 MIDDLEWARE = [
@@ -33,8 +39,8 @@ ROOT_URLCONF = 'irakli.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # ავდივართ 2 საფეხურით ზემოთ, რომ მივწვდეთ front-ს
-        'DIRS': [BASE_DIR.parent.parent / 'front'], 
+        # აი, აქ დაემატა მეორე .parent, რომ 'back'-იდან სრულად გამოვიდეს
+        'DIRS': [os.path.join(BASE_DIR.parent.parent, 'front')], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -49,6 +55,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'irakli.wsgi.application'
 
+# მონაცემთა ბაზა (SQLite)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -56,16 +63,31 @@ DATABASES = {
     }
 }
 
-LANGUAGE_CODE = 'ka-ge'
+# პაროლის ვალიდაცია (სტანდარტული)
+AUTH_PASSWORD_VALIDATORS = [
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+]
+
+# ენა და დრო
+LANGUAGE_CODE = 'ka' # ქართული ენა
 TIME_ZONE = 'Asia/Tbilisi'
 USE_I18N = True
 USE_TZ = True
 
+# სტატიკური ფაილები (CSS, JS, Images)
 STATIC_URL = 'static/'
 
-# აქაც ავდივართ 2 საფეხურით ზემოთ CSS-ისთვის და სურათებისთვის
+# მივუთითებთ სად ეძებოს CSS ფაილები
+# settings.py-ში იპოვე STATICFILES_DIRS და ასე ჩაწერე:
 STATICFILES_DIRS = [
-    BASE_DIR.parent.parent / 'front',
+    os.path.join(BASE_DIR.parent.parent, 'front', 'static'),
 ]
+
+# მედია ფაილების ადგილი (თუ ფილმების პოსტერებს ტვირთავ)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

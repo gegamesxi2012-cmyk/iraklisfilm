@@ -14,7 +14,7 @@
     <img src="{% static 'logo2.png' %}" alt="">
     <audio id="hoverSound" src="{% static 'ClickSound.mp3' %}" preload="auto"></audio>
     
-    <button onclick="location.href='#'">მთავარი</button>
+    <a href="{% url 'home_page' %}"><button>მთავარი</button></a>
     <button onclick="location.href='#'">კონტაქტი</button>
     <input type="search" placeholder="ძიება...">
     <button onclick="location.href='#'" id="register">რეგისტრაცია</button>

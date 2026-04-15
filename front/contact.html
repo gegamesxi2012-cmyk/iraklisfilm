@@ -11,23 +11,24 @@
     <div class="menu">
         <img src="logo2.png" alt="Logo">
         <audio id="hoverSound" src="ClickSound.mp3" preload="auto"></audio>
-        <button onclick="location.href='index.html'">მთავარი</button>
+        <a href="{% url 'home_page' %}"><button>მთავარი</button></a>
         <input type="search" placeholder="ძიება...">
         <button onclick="location.href='register.html'" id="register">რეგისტრაცია</button>
         <button onclick="location.href='login.html'" id="login">შესვლა</button>
         <button onclick="location.href='main.html'">გალერეა</button>
     </div>
 
-    <div class="mainDiv">
-        <div class="content">
-            <form action="">
-                <input type="tel" placeholder="შეიყვანეთ თქვენი საკონტაქტო ნომერი">
-                <input type="text" placeholder="შეიყვანეთ რას ეხება თემა(არასავალდებულო)">
-                <textarea placeholder="დაწერეთ თქვენი სათქმელი" id="mainTxt"></textarea>
-                <button type="submit">გაგზავნა</button>
-            </form>
-        </div>
+  <div class="mainDiv">
+    <div class="content">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="tel" name="phone" placeholder="შეიყვანეთ თქვენი საკონტაქტო ნომერი" required>
+            <input type="text" name="subject" placeholder="შეიყვანეთ რას ეხება თემა(არასავალდებულო)">
+            <textarea name="message_text" placeholder="დაწერეთ თქვენი სათქმელი" id="mainTxt" required></textarea>
+            <button type="submit">გაგზავნა</button>
+        </form>
     </div>
+</div>
 
     <script src="script.js"></script>
 </body>
