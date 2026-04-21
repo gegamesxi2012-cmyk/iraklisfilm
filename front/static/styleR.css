@@ -1,18 +1,8 @@
-@font-face {
-    font-family: "3d_unicode";
-    src: url("3d_unicode.ttf") format("truetype");
-}
-
 * {
-    position: relative;
-}
-
-body {
-    font-family: "bpg_extrasquare_mtavruli_2009", Georgia, 'Times New Roman', Times, serif;
+    box-sizing: border-box;
     margin: 0;
-  
+    padding: 0;
 }
-
 
 body::before {
     content: "";
@@ -21,126 +11,55 @@ body::before {
     background-image: url("555.jpg");
     filter: invert(100%);
     background-size: cover; 
-    background-repeat: no-repeat;
     z-index: -1; 
-    width: 100vw;
-    height: 100vh;
 }
 
-
-.menu
-{
-opacity: 70%;
-margin-top: 20px;
-padding: 5px;
-border-radius: 5px;
-border: none;
-background-color: rgb(0, 0, 0);
-color: rgb(255, 0, 0);
-height: 50px;
-font-weight: bold;
-font-size: medium;
-cursor: pointer;
-box-shadow: 0px 5px 10px rgb(151, 151, 151);
-display: flex;
-justify-content: center;
-align-items: center; 
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
 }
 
-.menu button
-{   
-    padding: 5px;
-    margin: 3px;
-    height: 50px;
-    width: 100px;
+.content {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+    color: orange;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.content input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #111;
+    color: white;
+}
+
+.content button {
+    width: 100%;
+    padding: 12px;
+    background-color: #833d15;
+    color: white;
+    border: none;
+    border-radius: 5px;
     font-weight: bold;
-    background-color: rgba(255, 94, 0, 0.596);
-    border-radius: 5px;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.349);
-}
-
-.menu button:hover
-{   
-    opacity: 70%;
-    padding: 5px;
-    margin: 3px;
-    height: 45px;
-    width: 98px;
-    background-color:  rgb(224, 138, 88);
-    border-radius: -5px;
-    box-shadow: 0px 5px 10px rgb(255, 84, 84);
-}
-
-.menu input{
-    background-color:  rgb(224, 138, 88);
-    border: 3px solid rgba(167, 84, 6, 0.555);
-    height: 50px;
-    border-radius: 5px;
-    width: 300px;
-    font-weight: bolder;
-    color: black;
-
-}
-
-.menu input::placeholder{
-color: black;
-}
-
-.menu img {
-    height: 47px;
-    width: auto;
-    object-fit: contain;
-    margin-left: 10px; /* ოდნავ დაშორება მარცხენა კიდიდან */
     cursor: pointer;
-    transition: transform 0.2s ease;
-    display: block;
 }
 
-.menu img:hover {
-    transform: scale(1.05); /* hover-ზე ოდნავ გადიდება */
-}
-.card{
-    display: flex;
-    width: 100vw;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
-.content{
-    opacity: 70%;
-    background-color: rgb(0, 0, 0);
-    gap: 10px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column; /* row შეცვალე column-ზე */
-    width: 300px;
-    border-radius: 5px;
-    align-items: center;
-    justify-content: center;
-    color: rgb(131, 61, 21);;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.349);
-   
-}
-
-.content input{
-    margin: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    right: -45px;
-
-}
-
-.content button{
-    margin: 10px;
-    width: 200px;
-    top: 30px;
-    right: -35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    background-color:  rgb(131, 61, 21);
-    padding: 10px;
-    font-weight: bolder;
+.content button:hover {
+    background-color: orange;
+    color: black;
 }
