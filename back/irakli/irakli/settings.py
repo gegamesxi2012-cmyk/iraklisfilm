@@ -72,6 +72,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+# აი ეს ხაზი დაამატე აუცილებლად:
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATICFILES_DIRS = [
     PROJECT_ROOT / 'front' / 'static',
 ]
