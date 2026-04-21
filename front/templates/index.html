@@ -14,13 +14,15 @@
     <audio id="hoverSound" src="{% static 'ClickSound.mp3' %}" preload="auto"></audio>
     
     <a href="{% url 'home_page' %}"><button>მთავარი</button></a>
-    <a href="#"><button>კონტაქტი</button></a>
+    <a href="{% url 'contact_page'%}"><button>კონტაქტი</button></a>
     
-    <input type="search" placeholder="ძიება...">
+    <form action="{% url 'main_page' %}" method="GET" style="display: inline-block;">
+    <input type="search" name="q" placeholder="ძიება..." value="{{ request.GET.q }}">
+    <button type="submit" style="display: none;"></button> </form>
     
     <a href="signup"><button id="register">რეგისტრაცია</button></a>
-    <a href="{% url 'login_page' %}"><button>ავტორიზაცია</button></a>
-    <a href="#"><button>გალერეა</button></a>
+    <a href="{% url 'signin' %}"><button>ავტორიზაცია</button></a>
+    <a href="{%url 'main_page'%}"><button>გალერეა</button></a>
 </div>
 
 <div class="irakliInf">

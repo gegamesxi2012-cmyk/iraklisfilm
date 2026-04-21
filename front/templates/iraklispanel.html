@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ადმინ პანელი - ირაკლი</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 0;
+        }
+        .admin-panel, .messages-panel, .movies-panel {
+            background-color: #262626;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 500px;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+        }
+        h2 { text-align: center; color: #f39c12; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; color: #bbb; }
+        input[type="text"], textarea {
+            width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #444;
+            background-color: #333; color: white; box-sizing: border-box;
+            outline: none;
+        }
+        input:focus { border-color: #f39c12; }
+        button {
+            width: 100%; padding: 12px; background-color: #f39c12; border: none;
+            border-radius: 6px; color: black; font-weight: bold; cursor: pointer;
+            transition: 0.3s; margin-top: 10px;
+        }
+        button:hover { background-color: #e67e22; }
+        .movie-item {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f39c12;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .movie-item h4 { margin: 0; color: #f39c12; }
+        .delete-btn {
+            width: auto; padding: 6px 14px; background-color: #e74c3c;
+            margin-top: 0; font-size: 13px;
+        }
+        .success-msg { color: #2ecc71; text-align: center; margin-bottom: 15px; font-weight: bold; }
+        .phone { color: #2ecc71; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+{% if success %}
+    <p class="success-msg">✅ ფილმი წარმატებით აიტვირთა!</p>
+{% endif %}
+
+<div class="admin-panel">
+    <h2>🎬 ფილმის ატვირთვა</h2>
+    <form id="uploadForm" action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>ფილმის დასახელება</label>
+            <input type="text" name="movie_title" placeholder="მაგ: მატრიცა" required>
+        </div>
+        <div class="form-group">
+            <label>აღწერა</label>
+            <textarea name="movie_description" rows="3" placeholder="მოკლე შინაარსი..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>YouTube ლინკი</label>
+            <input type="text" id="youtube_link" name="movie_file" 
+                   placeholder="ჩააგდე ჩვეულებრივი ლინკი..." required>
+        </div>
+        <button type="submit">ატვირთვის დაწყება</button>
+    </form>
+</div>
+
+<div class="movies-panel">
+    <h2>📋 ატვირთული ფილმები</h2>
+    {% if all_movies %}
+        {% for movie in all_movies %}
+            <div class="movie-item">
+                <div>
+                    <h4>{{ movie.title }}</h4>
+                    <small style="color: #aaa;">{{ movie.description|truncatechars:40 }}</small>
+                </div>
+                <form method="POST" action="{% url 'delete_movie' movie.id %}">
+                    {% csrf_token %}
+                    <button class="delete-btn" type="submit">🗑 წაშლა</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center; color:#777;">ფილმები არ არის.</p>
+    {% endif %}
+</div>
+
+<div class="messages-panel">
+    <h2>📩 შემოსული შეტყობინებები</h2>
+    {% if messages_list %}
+        {% for msg in messages_list %}
+            <div class="movie-item" style="flex-direction: column; align-items: flex-start; border-left-color: #2ecc71;">
+                <div style="width: 100%;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <h4 style="color: #2ecc71;">თემა: {{ msg.subject }}</h4>
+                        <span class="phone">{{ msg.phone }}</span>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 14px; color: #eee; line-height: 1.5;">
+                        {{ msg.text }}
+                    </p>
+                    <small style="color: #777; display: block; margin-top: 5px;">
+                        გამოიგზავნა: {{ msg.created_at|date:"d M, H:i" }}
+                    </small>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center; color:#777;">შეტყობინებები არ არის.</p>
+    {% endif %}
+</div>
+
+<a href="/" style="color:#777; text-decoration:none; margin-bottom: 50px;">← მთავარზე დაბრუნება</a>
+
+<script>
+    // YouTube-ის ლინკის გარდაქმნის ფუნქცია
+    function convertToEmbed(url) {
+        url = url.trim();
+        let videoId = '';
+
+        // თუ არის სტანდარტული ლინკი: youtube.com/watch?v=...
+        if (url.includes('youtube.com/watch')) {
+            const urlParams = new URLSearchParams(new URL(url).search);
+            videoId = urlParams.get('v');
+        } 
+        // თუ არის მოკლე ლინკი: youtu.be/...
+        else if (url.includes('youtu.be/')) {
+            videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+        } 
+        // თუ უკვე embed-ია, დააბრუნე როგორც არის
+        else if (url.includes('youtube.com/embed/')) {
+            return url;
+        }
+
+        return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+    }
+
+    // ფორმის გაგზავნისას ლინკის "გასწორება"
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        const linkInput = document.getElementById('youtube_link');
+        const originalValue = linkInput.value;
+        const convertedValue = convertToEmbed(originalValue);
+        
+        // ვცვლით მნიშვნელობას გაგზავნამდე
+        linkInput.value = convertedValue;
+        
+        console.log("Original:", originalValue);
+        console.log("Converted to:", convertedValue);
+    });
+</script>
+
+</body>
+</html>

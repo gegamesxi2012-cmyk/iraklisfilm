@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>შესვლა</title>
+    <link rel="stylesheet" href="{% static 'styleL.css' %}">
+    <link rel="stylesheet" href="{% static 'styleR.css' %}">
+    <link rel="icon" href="{% static 'logo2.png' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="menu">
+        <img src="{% static 'logo2.png' %}" alt="">
+        <audio id="hoverSound" src="{% static 'ClickSound.mp3' %}" preload="auto"></audio>
+        <a href="{% url 'home_page' %}"><button>მთავარი</button></a>
+        <a href="{% url 'contact_page'%}"><button>კონტაქტი</button></a>
+        <form action="{% url 'main_page' %}" method="GET" style="display: inline-block;">
+    <input type="search" name="q" placeholder="ძიება..." value="{{ request.GET.q }}">
+    <button type="submit" style="display: none;"></button> </form>
+        <!-- ✅ გასწორებული: სწორი url სახელები -->
+        <a href="{% url 'signup_page' %}"><button id="register">რეგისტრაცია</button></a>
+        <a href="{%url 'main_page'%}"><button>გალერეა</button></a>
+    </div>
+
+    <div class="card">
+        <div class="content">
+            <h2>ავტორიზაცია</h2>
+
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="სახელი" required>
+                <input type="password" name="password" placeholder="პაროლი" required>
+                <button type="submit">შესვლა</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

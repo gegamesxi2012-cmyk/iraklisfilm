@@ -46,3 +46,8 @@ body iframe{
     border: solid;
     box-shadow: none;
 }
+
+p{
+    color: aliceblue;
+    background-color:rgba(255, 94, 0, 0.596) ;
+}

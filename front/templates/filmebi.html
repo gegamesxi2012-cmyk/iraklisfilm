@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ფილმები</title>
+    <link rel="stylesheet" href="{% static 'stylem.css' %}">
+    <link rel="icon" href="{% static 'logo2.png' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="header">
+        <input type="search" class="search" placeholder="შეიყვანეთ ფილმის სათაური">
+    </div>
+
+    <div class="main">
+        {% if movies %}
+            {% for movie in movies %}
+                <!-- ✅ გასწორებული: ფილმები DB-დან იტვირთება -->
+                <iframe
+                    src="{{ movie.video_url }}"
+                    title="{{ movie.title }}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            {% endfor %}
+        {% else %}
+            <p style="color: white; text-align: center;">ფილმები არ მოიძებნა.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

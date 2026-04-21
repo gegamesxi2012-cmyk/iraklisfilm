@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>რეგისტრაცია</title>
+    <link rel="stylesheet" href="{% static 'styleR.css' %}">
+    <link rel="icon" href="{% static 'logo2.png' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="menu">
+        <img src="{% static 'logo2.png' %}" alt="">
+        <a href="{% url 'home_page' %}"><button>მთავარი</button></a>
+        <a href="{% url 'contact_page'%}"><button>კონტაქტი</button></a>
+        <form action="{% url 'main_page' %}" method="GET" style="display: inline-block;">
+    <input type="search" name="q" placeholder="ძიება..." value="{{ request.GET.q }}">
+    <button type="submit" style="display: none;"></button> </form>
+        <a href="{% url 'signin' %}"><button>შესვლა</button></a>
+        <a href="{%url 'main_page'%}"><button>გალერეა</button></a>
+    </div>
+
+    <div class="card">
+        <div class="content">
+            <h2>რეგისტრაცია</h2>
+
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <!-- ✅ გასწორებული: username და password — views.py-ს შეესაბამება -->
+                <input type="text" name="username" placeholder="მომხმარებლის სახელი" required>
+                <input type="password" name="password" placeholder="პაროლი" required>
+                <button type="submit">რეგისტრაცია</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
