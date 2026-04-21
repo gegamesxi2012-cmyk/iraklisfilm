@@ -78,11 +78,11 @@ def delete_movie(request, movie_id):
     return redirect('upload_movie_page')
 
 # --- გვერდები ---
-@login_required(login_url='signin')
+
 def home(request):
     return render(request, 'index.html')
 
-@login_required(login_url='signin')
+
 def main(request):
     query = request.GET.get('q') # იჭერს ძებნას ნებისმიერი გვერდიდან
     

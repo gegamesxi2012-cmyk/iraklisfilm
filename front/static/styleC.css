@@ -1,40 +1,226 @@
-.mainDiv {
+@font-face {
+    font-family: "3d_unicode";
+    src: url("3d_unicode.woff2") format("woff2"),
+         url("3d_unicode.woff") format("woff"),
+         url("3d_unicode.ttf") format("truetype");
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "bpg_extrasquare_mtavruli_2009", Georgia, 'Times New Roman', Times, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("555.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: invert(100%);
+    z-index: -1;
+}
+
+/* ── Menu ── */
+.menu {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
+    gap: 8px;
+    margin: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    font-size: 1rem;
+    opacity: 0.85;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.content {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 30px;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 10px;
+.menu button {
+    padding: 8px 12px;
+    height: 44px;
+    min-width: 90px;
+    font-weight: bold;
+    font-size: 0.875rem;
+    background-color: rgba(255, 94, 0, 0.6);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
 }
 
-.content input, .content textarea {
+.menu button:hover {
+    background-color: rgb(224, 138, 88);
+    box-shadow: 0 4px 10px rgb(255, 84, 84);
+    transform: translateY(1px);
+}
+
+.menu button:active {
+    transform: translateY(2px);
+}
+
+.menu input {
+    background-color: rgb(224, 138, 88);
+    border: 3px solid rgba(167, 84, 6, 0.55);
+    height: 44px;
+    border-radius: 6px;
+    width: min(300px, 90vw);
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: black;
+    padding: 0 12px;
+}
+
+.menu input::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.menu img {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.menu img:hover {
+    transform: scale(1.05);
+}
+
+/* ── Page wrapper ── */
+.mainDiv {
     width: 100%;
-    margin-bottom: 15px;
-    padding: 12px;
-    background: #222;
-    border: 1px solid #444;
-    color: white;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 90px);
+    padding: 24px 16px;
+}
+
+/* ── Content / form card ── */
+.content {
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: min(440px, 100%);
+    padding: clamp(20px, 5vw, 32px);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.content input,
+.content textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 2px solid rgba(167, 84, 6, 0.55);
+    background-color: rgb(224, 138, 88);
+    color: black;
+    font-size: 0.9rem;
+    font-weight: bold;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.content input:focus,
+.content textarea:focus {
+    outline: none;
+    border-color: rgba(255, 94, 0, 0.9);
+}
+
+.content input::placeholder,
+.content textarea::placeholder {
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .content textarea {
-    height: 150px;
-    resize: none;
+    resize: vertical;
+    min-height: 120px;
 }
 
-.content button {
-    width: 100%;
-    padding: 15px;
-    background: #833d15;
-    color: white;
-    font-weight: bold;
+.content button[type="submit"] {
+    width: 55%;
+    padding: 11px;
+    border-radius: 6px;
     border: none;
-    border-radius: 5px;
+    background-color: rgb(131, 61, 21);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    font-family: inherit;
     cursor: pointer;
+    opacity: 0.85;
+    margin-top: 6px;
+    transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.content button[type="submit"]:hover {
+    background-color: rgb(224, 138, 88);
+    box-shadow: 0 4px 10px rgb(255, 84, 84);
+    transform: translateY(1px);
+    opacity: 1;
+}
+
+.content button[type="submit"]:active {
+    transform: translateY(2px);
+}
+
+#mainTxt {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .menu {
+        margin: 10px;
+        padding: 10px 8px;
+    }
+
+    .menu button {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 0;
+    }
+
+    .menu input {
+        width: 100%;
+    }
+
+    .content button[type="submit"] {
+        width: 75%;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu button {
+        font-size: 0.8rem;
+        height: 40px;
+    }
+
+    .content button[type="submit"] {
+        width: 90%;
+    }
 }

@@ -46,20 +46,24 @@
             padding: 0 10px;
         }
 
-       .main {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 320-დან 280-მდე დავაკელით */
-    gap: 20px;
-    padding: 20px;
-    max-width: 1300px;
-    margin: 0 auto;
-}
+        .main {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
 
-.movie-card iframe {
-    width: 100%;
-    aspect-ratio: 16 / 9; /* ეს უფრო სწორია ვიდრე ფიქსირებული სიმაღლე */
-    border: none;
-}
+        .movie-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #444;
+        }
 
         .movie-card iframe {
             width: 100%;
