@@ -1,3 +1,4 @@
+/* ── საერთო სტილები ── */
 @font-face {
     font-family: "3d_unicode";
     src: url("3d_unicode.woff2") format("woff2"),
@@ -9,6 +10,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
 body {
@@ -29,62 +31,22 @@ body::before {
     z-index: -1;
 }
 
-/* ── Menu ── */
+/* ── მენიუს კონტეინერი (კომპიუტერისთვის და ტაბლეტისთვის) ── */
 .menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin: 16px;
-    padding: 10px;
+    margin: 16px auto;
+    padding: 12px 16px;
+    width: 95%;
+    max-width: 1200px;
     border-radius: 8px;
     background-color: rgb(0, 0, 0);
-    color: rgb(255, 0, 0);
-    font-weight: bold;
-    font-size: 1rem;
     opacity: 0.85;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.menu button {
-    padding: 8px 12px;
-    height: 44px;
-    min-width: 90px;
-    font-weight: bold;
-    font-size: 0.875rem;
-    background-color: rgba(255, 94, 0, 0.6);
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
-}
-
-.menu button:hover {
-    background-color: rgb(224, 138, 88);
-    box-shadow: 0 4px 10px rgb(255, 84, 84);
-    transform: translateY(1px);
-}
-
-.menu button:active {
-    transform: translateY(2px);
-}
-
-.menu input {
-    background-color: rgb(224, 138, 88);
-    border: 3px solid rgba(167, 84, 6, 0.55);
-    height: 44px;
-    border-radius: 6px;
-    width: min(300px, 90vw);
-    font-weight: bold;
-    font-size: 0.875rem;
-    color: black;
-    padding: 0 12px;
-}
-
-.menu input::placeholder {
-    color: rgba(0, 0, 0, 0.6);
+    
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .menu img {
@@ -99,41 +61,90 @@ body::before {
     transform: scale(1.05);
 }
 
-/* ── Profile panel ── */
+.menu button {
+    height: 44px;
+    padding: 0 16px;
+    font-weight: bold;
+    font-size: 0.875rem;
+    font-family: inherit;
+    background-color: rgba(255, 94, 0, 0.6);
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.menu button:hover {
+    background-color: rgb(224, 138, 88);
+    box-shadow: 0 4px 10px rgb(255, 84, 84);
+    transform: translateY(-1px);
+}
+
+.menu button:active {
+    transform: translateY(1px);
+}
+
+.menu input {
+    background-color: rgb(224, 138, 88);
+    border: 3px solid rgba(167, 84, 6, 0.55);
+    height: 44px;
+    border-radius: 6px;
+    width: 220px;
+    font-weight: bold;
+    font-size: 0.875rem;
+    color: black;
+    padding: 0 12px;
+    font-family: inherit;
+}
+
+.menu input::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* ── პროფილის პანელი (კომპიუტერი) ── */
+/* ── პროფილის პანელი (კომპიუტერი) ── */
 .irakliInf {
     position: fixed;
-    bottom: 0;
+    /* bottom: 0; */
     left: 50%;
     transform: translateX(-50%);
     width: min(100%, 1400px);
-    height: clamp(380px, 55vh, 700px);
+    
+    /* სიმაღლე ავტომატური გახდეს, რომ შიგთავსს მოერგოს და თავი არ გადაიჭრას */
+    height: auto; 
+    max-height: 90vh; /* ეკრანის 80%-ზე მეტი რომ არ დაიკავოს */
+    
     background-color: rgba(0, 0, 0, 0.75);
     border-radius: 16px 16px 0 0;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 20px;
-    overflow: hidden;
+    align-items: flex-end; 
+    justify-content: space-between; /* space-around-ის ნაცვლად, რომ gap შემცირდეს და კიდეებზე განაწილდეს */
+    padding: 15px clamp(20px, 5vw, 60px); /* შიდა დაშორებები გვერდებიდან */
     z-index: 10;
 }
 
 .irakli {
-    position: absolute;
-    bottom: 0;
-    left: clamp(-60px, -2vw, -10px);
-    height: clamp(380px, 75vh, 950px);
+    position: relative; /* absolute-დან გადავიყვანეთ relative-ზე, რომ გვერდზე მყოფ .info ბლოკს ადგილი პატიოსნად დაუთმოს და დიდი gap არ გაჩნდეს */
+    bottom: 10px; /* padding-ის კომპენსაცია, რომ ძირს იდეალურად დაჯდეს */
+    height: auto;
+    max-height: clamp(350px, 65vh, 600px); /* სურათის მაქსიმალური სიმაღლე, რომ თავი აღარ გადაიჭრას */
     width: auto;
+    object-fit: contain;
     z-index: 10;
     pointer-events: none;
     user-select: none;
+    border-radius: 5px;
 }
 
 .info {
     background-color: rgba(255, 94, 0, 0.6);
-    height: 90%;
-    width: clamp(260px, 50%, 600px);
-    margin-left: auto;
-    margin-right: clamp(10px, 4vw, 50px);
+    /* სიმაღლე სურათს აჰყვება ავტომატურად */
+    bottom: 10px; /* padding-ის კომპენსაცია, რომ ძირს იდეალურად დაჯდეს */
+    height: auto;
+    max-height: clamp(320px, 60vh, 550px); 
+    width: clamp(300px, 55%, 700px); /* ბარათის ოპტიმალური სიგანე */
+    margin-left: 20px; /* სურათსა და ტექსტს შორის კონტროლირებადი პატარა დაშორება */
     padding: clamp(16px, 3vw, 30px);
     border-radius: 14px;
     z-index: 5;
@@ -162,23 +173,60 @@ body::before {
     line-height: 1.55;
 }
 
-/* ── Responsive ── */
+/* ── რესპონსიულობა (Responsive) ── */
+
+/* მობილურები და პატარა ტაბლეტები (768px და ქვემოთ) */
 @media (max-width: 768px) {
     body {
         overflow-y: auto;
         padding-bottom: 40px;
     }
 
+    .menu {
+        padding: 12px;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    /* ლოგო იკავებს ცენტრს თავში */
+    .menu img {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 4px;
+    }
+
+    /* ღილაკები ლამაზად ჯდება ორ-ორად გვერდიგვერდ */
+    .menu a, .menu form {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 120px;
+    }
+
+    .menu button {
+        width: 100%;
+    }
+
+    /* ძებნის ველი იკავებს მთლიან ხაზს მობილურზე */
+    .menu form {
+        flex: 1 1 100%;
+    }
+
+    .menu input {
+        width: 100%;
+    }
+
+    /* პროფილის ბლოკი მობილურზე ხდება ჩვეულებრივი (არა ფიქსირებული) */
     .irakliInf {
         position: relative;
-        left: 0;
         transform: none;
+        left: 0;
         flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 20px auto;
         height: auto;
-        width: 100%;
-        margin-top: 20px;
+        width: 95%;
         padding: 16px;
-        border-radius: 16px 16px 0 0;
+        border-radius: 16px;
         overflow: visible;
     }
 
@@ -186,7 +234,7 @@ body::before {
         position: relative;
         left: 0;
         bottom: 0;
-        height: clamp(200px, 55vw, 360px);
+        height: clamp(220px, 55vw, 360px);
         margin: 0 auto 12px;
         display: block;
     }
@@ -197,25 +245,26 @@ body::before {
         height: auto;
         overflow-y: visible;
     }
-
-    .menu {
-        margin: 10px;
-        padding: 10px 8px;
-    }
-
-    .menu button {
-        flex: 1 1 calc(50% - 8px);
-        min-width: 0;
-    }
-
-    .menu input {
-        width: 100%;
-    }
 }
 
+/* ძალიან პატარა ეკრანები (480px და ქვემოთ) */
 @media (max-width: 480px) {
+    .menu {
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .menu a {
+        flex: 1 1 calc(50% - 6px);
+    }
+
     .menu button {
         font-size: 0.8rem;
+        height: 40px;
+        padding: 0 8px;
+    }
+    
+    .menu input {
         height: 40px;
     }
 }
